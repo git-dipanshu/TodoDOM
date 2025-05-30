@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DOM-3</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+  <!-- Dont make any changes here -->
+  <h1>TODO App</h1>
+
+  <a href="./index.html">HOME PAGE</a>
+
+
+  <div>
+    <!-- ***** We are using form here  ****  -->
+    <!-- <form>
+        <label for="">Task Name</label><br />
+        <input id="task" type="text" placeholder="Enter Task Name" /><br />
+        <label for="">Priority </label><br />
+        <select id="priority">
+          <option value="">Select Priority</option>
+          <option value="High">High</option>
+          <option value="Low">Low</option>
+         
+        </select>
+         <br /> 
+        <input type="submit">
+        <input type="submit">
+        
+      </form>  -->
+    <table>
+      <!-- Dont change order of columns -->
+      <thead>
+        <tr>
+          <th>Task</th>
+          <th>Priority</th>
+          <th>Favourite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append your output to tbody -->
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
+
+<script>
+  let array = JSON.parse(localStorage.getItem("favArr")) || []; // let favArr is a variable
+  displayTable(array);
+ 
+
+  function displayTable(array) {
+
+    document.querySelector("tbody").innerText = "";
+    array.forEach((element, i) => {
+  
+
+      let row = document.createElement("tr");
+    
+
+      let td1 = document.createElement("td");
+      td1.innerText = element.taskName;
+   
+
+      let td2 = document.createElement("td");
+      td2.innerText = element.taskPriority;
+    
+
+      let td3 = document.createElement("button");
+      td3.innerText = "DELETE";
+      td3.addEventListener("click", function () {
+        
+        array.splice(i, 1)
+        localStorage.setItem("favArr", JSON.stringify(array));
+        displayTable(array);
+      })
+
+
+      row.append(td1, td2, td3);
+      document.querySelector("tbody").append(row)
+
+    });
+  }
+</script>
